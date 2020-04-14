@@ -1,0 +1,35 @@
+@import 'style_phone.css';
+@import 'style_ipad.css';
+@import 'style_laptop.css';
+@import 'style_detail.css';
+html,body{
+	margin: 0;
+	padding: 0;
+}
+
+html{
+	font-family: 'Comic Neue', cursive;
+	font-size: 16px;
+}
+
+body{
+	max-width: 1100px;
+	width: 100%;
+	margin: 0 auto;
+	border: 1px solid black;
+}
+nav a {
+	font-weight: bold;
+	color:rebeccapurple;
+	text-decoration: none;
+}
+.card header p {
+	color: red;
+}
+
+
+
+
+
+
+

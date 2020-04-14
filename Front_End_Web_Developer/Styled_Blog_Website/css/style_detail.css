@@ -1,0 +1,15 @@
+.picture figure {
+	margin: 10px;
+}
+.avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.authorinfo ul {
+	list-style-type: none;
+}
+.authorinfo ul li:nth-child(1) {
+	color: blue;
+}
