@@ -123,11 +123,6 @@
   let navbarElement=document.querySelector(".page__header");
   let backtotopElement=document.querySelector(".backToTop");
   let mainElement=document.querySelector("main");
-  navbarElement.onclick=(event)=>{
-    if(event.target.tagName==="A"){
-      isOnTopClick=true;
-    };
-  };
   mainElement.onclick=(event)=>{
       if(event.target.tagName==="IMG"){
         let thisElement=event.target;
@@ -145,8 +140,7 @@
         };
       };
   };
-  let isOnTopClick=false;
-  let isSetTimeOut=false;
+  let isSetTimeOut=true;
   let timeoutID=0;
   let setnavbaractive=(data)=> {
     let activeLinks=document.evaluate("//a[contains(.,'"+data+"')]",document,null,XPathResult.ANY_TYPE,null);
@@ -161,13 +155,13 @@
     activeLink.classList.remove("your-active-class");
   };
   let setTimeoutEvent=(e)=>{
-    if(!isSetTimeOut){
-      isSetTimeOut=true;
+    if(isSetTimeOut){
+      isSetTimeOut=false;
       window.clearTimeout(timeoutID);
       navbarElement.style.visibility="visible";
       timeoutID=window.setTimeout(()=>{
         navbarElement.style.visibility="hidden";
-        isSetTimeOut=false;
+        isSetTimeOut=true;
       },10000);
       console.log(timeoutID);
     }else{
@@ -179,19 +173,16 @@
     window.addEventListener("scroll",setTimeoutEvent);
   };
   let removeTimeoutAction=()=>{
-    console.log("begin remove the timeoutID and scroll Listener.");
     window.clearTimeout(timeoutID);
     window.removeEventListener("scroll",setTimeoutEvent);
-    isSetTimeOut=false;
+    isSetTimeOut=true;
   };
   let callback=(entries,observer) => {
     entries.forEach(entry => {
-      console.log(entry.target.tagName);
       switch(entry.target.tagName){
         case "HEADER":
           if(entry.intersectionRatio>=0.5){
             /*console.log(entry.intersectionRatio);*/
-            isOnTopClick=false;
             console.log("Hidden Back To Top!");
             backtotopElement.style.visibility="hidden";
             removeTimeoutAction();
@@ -201,14 +192,9 @@
             /*console.log(entry.intersectionRatio);*/
             console.log("Show Back To Top!");
             backtotopElement.style.visibility="visible";
-            if(isOnTopClick){
-              navbarElement.addEventListener("mouseenter",removeTimeoutAction);
-              navbarElement.addEventListener("mouseleave",setTimeoutAction);
-            }else{
-              window.addEventListener("scroll",setTimeoutEvent);
-              navbarElement.addEventListener("mouseenter",removeTimeoutAction);
-              navbarElement.addEventListener("mouseleave",setTimeoutAction);
-            };
+            window.addEventListener("scroll",setTimeoutEvent);
+            navbarElement.addEventListener("mouseenter",removeTimeoutAction);
+            navbarElement.addEventListener("mouseleave",setTimeoutAction);
           };
           break;
         case "SECTION":
