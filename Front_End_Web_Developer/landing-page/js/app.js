@@ -129,6 +129,7 @@ var navView={
 			controler.removTimeout_to_navbar();
 		});
 		this.navbarElement.addEventListener("mouseleave",()=>{
+			console.log("mouse out navbar");
 			controler.setismoseinnavbar(false);
 			controler.addTimeout_to_navbar(10000);
 		});
@@ -141,7 +142,6 @@ var navView={
 			}
 		});
 		this.navbarElement.addEventListener("touchend",event=>{
-			event.preventDefault();
 			console.log("finger out navbar");
 			controler.setisfingerinnavbar(false);
 			controler.addTimeout_to_navbar(10000);
