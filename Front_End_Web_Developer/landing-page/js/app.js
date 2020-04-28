@@ -132,7 +132,7 @@ var navView={
 			controler.setismoseinnavbar(false);
 			controler.addTimeout_to_navbar(10000);
 		});
-		this.navbarElement.addEventListener("touchmove",event=>{
+		this.navbarElement.addEventListener("touchstart",event=>{
 			console.log("finger in navbar");
 			event.preventDefault();
 			if(!controler.getisfingerinnavbar()){
@@ -143,7 +143,7 @@ var navView={
 		this.navbarElement.addEventListener("touchend",event=>{
 			event.preventDefault();
 			console.log("finger out navbar");
-			controler.setisfingerinnavbar(true);
+			controler.setisfingerinnavbar(false);
 			controler.addTimeout_to_navbar(10000);
 		});
 	},
