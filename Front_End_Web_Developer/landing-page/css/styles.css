@@ -82,8 +82,14 @@ section {
     color: #000;
 }
 
+.navbar__menu .menu__link.your-active-class {
+    background: #333;
+    color: #fff;
+    transition: ease 0.3s all;
+}
+
 .navbar__menu .menu__link:hover {
-    background: #333；
+    background: #333;
     color: #fff;
     transition: ease 0.3s all;
 }
@@ -114,6 +120,11 @@ section {
 .landing__container {
     padding: 1em;
     text-align: left;
+}
+
+.landing__container h2:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 @media only screen and (min-width: 35em){
@@ -190,12 +201,13 @@ section:nth-of-type(3n + 1) .landing__container::after {
 }
 
 
+
 /* ---- Theme State Rules ---- */
 /* Section Active Styles */
 /* Note: your-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
 section.your-active-class {
     background: rgb(0, 0, 0);
-    background: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 section.your-active-class .landing__container::before {
@@ -227,39 +239,5 @@ section.your-active-class .landing__container::after {
     position: fixed;
     bottom: 20vh;
     right: 5vw;
-    opacity: 0.5;
-}
-
-.navbar__menu .your-active-class {
-    background: #333;
-    color: #fff;
-    transition: ease 0.3s all;   
-}
-
-.collapse-icon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-}
-
-.hiddenHeader {
-    text-align: right;
-    padding-right:4em;
-    padding-left:4em;
-    padding-top: 0;
-    padding-bottom: 0; 
-}
-
-.hiddenHeader h2 {
-    margin-bottom: 0;
-    border: none;
-}
-
-section.hidden .landing__container {
-    display: none;
-}
-
-section.hidden {
-    min-height: 0;
+    opacity: 0.8;
 }
