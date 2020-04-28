@@ -145,6 +145,9 @@ var navView={
 			console.log("finger out navbar");
 			controler.setisfingerinnavbar(false);
 			controler.addTimeout_to_navbar(10000);
+			if(event.target.tagName==="A"){
+				return true;
+			};
 		});
 	},
 	setactive:function(data){
