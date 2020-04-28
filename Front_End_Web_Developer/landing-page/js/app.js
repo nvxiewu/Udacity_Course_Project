@@ -134,12 +134,14 @@ var navView={
 		});
 		this.navbarElement.addEventListener("touchmove",event=>{
 			console.log("finger in navbar");
+			event.preventDefault();
 			if(!controler.getisfingerinnavbar()){
 				controler.setisfingerinnavbar(true);
 				controler.removTimeout_to_navbar();
 			}
 		});
 		this.navbarElement.addEventListener("touchend",event=>{
+			event.preventDefault();
 			console.log("finger out navbar");
 			controler.setisfingerinnavbar(true);
 			controler.addTimeout_to_navbar(10000);
