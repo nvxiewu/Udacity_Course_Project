@@ -123,15 +123,23 @@ var navView={
 			fragment.appendChild(mylink); 
 		});
 		mynavlist.appendChild(fragment);
-		this.navbarElement.addEventListener("mouseenter",()=>{
-			console.log("mouse in navbar");
-			controler.setismoseinnavbar(true);
-			controler.removTimeout_to_navbar();
+		this.navbarElement.addEventListener("mouseenter",event=>{
+			if(controler.getisfingerinnavbar()){
+				event.preventDefault();
+			}else{
+				console.log("mouse in navbar");
+				controler.setismoseinnavbar(true);
+				controler.removTimeout_to_navbar();
+			};
 		});
-		this.navbarElement.addEventListener("mouseleave",()=>{
-			console.log("mouse out navbar");
-			controler.setismoseinnavbar(false);
-			controler.addTimeout_to_navbar(10000);
+		this.navbarElement.addEventListener("mouseleave",event=>{
+			if(controler.getisfingerinnavbar()){
+				event.preventDefault();
+			}else{
+				console.log("mouse out navbar");
+				controler.setismoseinnavbar(false);
+				controler.addTimeout_to_navbar(10000);
+			};
 		});
 		this.navbarElement.addEventListener("touchstart",event=>{
 			console.log("finger in navbar");
@@ -139,13 +147,12 @@ var navView={
 				controler.setisfingerinnavbar(true);
 				controler.removTimeout_to_navbar();
 			}
-		},false);
+		});
 		this.navbarElement.addEventListener("touchend",event=>{
 			console.log("finger out navbar");
-			controler.setismoseinnavbar(false);
 			controler.setisfingerinnavbar(false);
 			controler.addTimeout_to_navbar(10000);
-		},false);
+		});
 	},
 	setactive:function(data){
 		let activeLinks=document.evaluate("//a[contains(.,'"+data+"')]",document,null,XPathResult.ANY_TYPE,null);
