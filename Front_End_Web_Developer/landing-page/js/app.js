@@ -139,13 +139,13 @@ var navView={
 				controler.setisfingerinnavbar(true);
 				controler.removTimeout_to_navbar();
 			}
-		});
+		},false);
 		this.navbarElement.addEventListener("touchend",event=>{
 			console.log("finger out navbar");
 			controler.setismoseinnavbar(false);
 			controler.setisfingerinnavbar(false);
 			controler.addTimeout_to_navbar(10000);
-		});
+		},false);
 	},
 	setactive:function(data){
 		let activeLinks=document.evaluate("//a[contains(.,'"+data+"')]",document,null,XPathResult.ANY_TYPE,null);
