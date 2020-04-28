@@ -124,7 +124,7 @@ var navView={
 		});
 		mynavlist.appendChild(fragment);
 		this.navbarElement.addEventListener("mouseenter",event=>{
-			if(controler.getisfingerinnavbar()){
+			if(controler.getistouchscreen()){
 				event.preventDefault();
 			}else{
 				console.log("mouse in navbar");
@@ -133,7 +133,7 @@ var navView={
 			};
 		});
 		this.navbarElement.addEventListener("mouseleave",event=>{
-			if(controler.getisfingerinnavbar()){
+			if(controler.getistouchscreen()){
 				event.preventDefault();
 			}else{
 				console.log("mouse out navbar");
@@ -143,6 +143,7 @@ var navView={
 		});
 		this.navbarElement.addEventListener("touchstart",event=>{
 			console.log("finger in navbar");
+			controler.setistouchscreen(true);
 			if(!controler.getisfingerinnavbar()){
 				controler.setisfingerinnavbar(true);
 				controler.removTimeout_to_navbar();
@@ -260,6 +261,7 @@ var controler={
 	ismoseinnavbar:false,
 	isfingerinnavbar:false,
 	issetTimeout:false,
+	istouchscreen:false,
 	init:function(){
 		sections.init(4);
 		backToView.init();
@@ -303,6 +305,12 @@ var controler={
 	},
 	setisfingerinnavbar:function(b) {
 		this.isfingerinnavbar=b;
+	},
+	getistouchscreen:function() {
+		return this.istouchscreen;
+	},
+	setistouchscreen:function(b) {
+		this.istouchscreen=b;
 	},
 	addTimeout_to_navbar:function(time) {
 		if(!this.getismoseinnavbar()&&!this.getisinTopSection()&&!this.getissetTimeout()&&!this.getisfingerinnavbar()){
