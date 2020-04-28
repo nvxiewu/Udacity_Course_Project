@@ -135,7 +135,6 @@ var navView={
 		});
 		this.navbarElement.addEventListener("touchstart",event=>{
 			console.log("finger in navbar");
-			event.preventDefault();
 			if(!controler.getisfingerinnavbar()){
 				controler.setisfingerinnavbar(true);
 				controler.removTimeout_to_navbar();
@@ -143,6 +142,7 @@ var navView={
 		});
 		this.navbarElement.addEventListener("touchend",event=>{
 			console.log("finger out navbar");
+			controler.setismoseinnavbar(false);
 			controler.setisfingerinnavbar(false);
 			controler.addTimeout_to_navbar(10000);
 		});
