@@ -75,11 +75,8 @@ let callback=(entries,observer) => {
     	switch(entry.target.tagName){
         	case "HEADER":
           	if(entry.intersectionRatio>=0.5){
-          		controler.setisinTopSection(true);
           		backToView.setunvisible();
-          		controler.removTimeout_to_navbar();
           	}else{
-            	controler.setisinTopSection(false);
             	backToView.setvisible();
           	};
           	break;
@@ -155,15 +152,8 @@ var navView={
 		});
 		this.navbarElement.addEventListener("touchend",event=>{
 			console.log("finger out navbar");
-			if(event.target.tagName==="A"&&controler.getisinTopSection()){
-				controler.setisfingerinnavbar(false);
-				window.setTimeout(()=>{
-					controler.addTimeout_to_navbar(10000);
-				},1000);
-			}else{
-				controler.setisfingerinnavbar(false);
-				controler.addTimeout_to_navbar(10000);
-			}
+			controler.setisfingerinnavbar(false);
+			controler.addTimeout_to_navbar(10000);
 		});
 	},
 	setactive:function(data){
@@ -268,7 +258,6 @@ var backToView={
 
 var controler={
 	timeoutID:0,
-	isinTopSection:true,
 	ismoseinnavbar:false,
 	isfingerinnavbar:false,
 	issetTimeout:false,
@@ -279,19 +268,11 @@ var controler={
 		sectionView.init();
 		navView.init();
 		window.addEventListener("scroll",()=>{
-			if(!controler.getisinTopSection()){
 				controler.addTimeout_to_navbar(10000);
-			};
 		});
 	},
 	getsections:function(){
 		return sections.getsections();
-	},
-	setisinTopSection:function(b){
-		this.isinTopSection=b;
-	},
-	getisinTopSection:function(){
-		return this.isinTopSection;
 	},
 	settimeoutID:function(id){
 		this.timeoutID=id;
@@ -324,7 +305,7 @@ var controler={
 		this.istouchscreen=b;
 	},
 	addTimeout_to_navbar:function(time) {
-		if(!this.getismoseinnavbar()&&!this.getisinTopSection()&&!this.getissetTimeout()&&!this.getisfingerinnavbar()){
+		if(!this.getismoseinnavbar()&&!this.getissetTimeout()&&!this.getisfingerinnavbar()){
 			navView.setvisible();
 			this.setissetTimeout(true);
 			this.settimeoutID(window.setTimeout(()=>{
