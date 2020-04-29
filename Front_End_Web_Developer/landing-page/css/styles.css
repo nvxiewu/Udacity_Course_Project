@@ -88,7 +88,7 @@ section {
     transition: ease 0.3s all;
 }
 
-.navbar__menu .menu__link:hover {
+.navbar__menu .menu__link.desktop:hover {
     background: #333;
     color: #fff;
     transition: ease 0.3s all;

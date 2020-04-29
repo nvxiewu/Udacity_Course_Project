@@ -119,6 +119,7 @@ var navView={
 			mylinka.textContent=section.getheader();
 			mylinka.setAttribute("href","#"+section.getid());
 			mylinka.setAttribute("class","menu__link");
+			mylinka.classList.add("desktop");
 			mylink.appendChild(mylinka);
 			fragment.appendChild(mylink); 
 		});
@@ -144,6 +145,9 @@ var navView={
 		this.navbarElement.addEventListener("touchstart",event=>{
 			console.log("finger in navbar");
 			controler.setistouchscreen(true);
+			document.querySelectorAll(".desktop").forEach(item=>{
+				item.classList.remove("desktop");
+			});
 			if(!controler.getisfingerinnavbar()){
 				controler.setisfingerinnavbar(true);
 				controler.removTimeout_to_navbar();
