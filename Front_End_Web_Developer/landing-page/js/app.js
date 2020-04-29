@@ -155,8 +155,15 @@ var navView={
 		});
 		this.navbarElement.addEventListener("touchend",event=>{
 			console.log("finger out navbar");
-			controler.setisfingerinnavbar(false);
-			controler.addTimeout_to_navbar(10000);
+			if(event.target.tagName==="A"&&controler.getisinTopSection()){
+				controler.setisfingerinnavbar(false);
+				window.setTimeout(()=>{
+					controler.addTimeout_to_navbar(10000);
+				},1000);
+			}else{
+				controler.setisfingerinnavbar(false);
+				controler.addTimeout_to_navbar(10000);
+			}
 		});
 	},
 	setactive:function(data){
