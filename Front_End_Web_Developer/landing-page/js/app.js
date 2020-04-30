@@ -119,7 +119,6 @@ window.onload=function() {
 				let mylink=document.createElement('li');
 				let mylinka=document.createElement('a'); 
 				mylinka.textContent=section.getheader();
-				mylinka.setAttribute("href","#"+section.getid());
 				mylinka.setAttribute("class","menu__link");
 				mylinka.classList.add("desktop");
 				mylink.appendChild(mylinka);
@@ -160,6 +159,12 @@ window.onload=function() {
 				controler.setisfingerinnavbar(false);
 				controler.addTimeout_to_navbar(10000);
 			});
+			this.navbarElement.addEventListener("click",event=>{
+				if(event.target.tagName==="A"){
+					let data=event.target.textContent;
+					sectionView.scrollToViewport(data);
+				}
+			});
 		},
 		setactive:function(data){
 			let activeLinks=document.evaluate("//a[contains(.,'"+data+"')]",document,null,XPathResult.ANY_TYPE,null);
@@ -185,10 +190,10 @@ window.onload=function() {
 */
 	var sectionView={
 // Define init function for section element when window loaded.
+		myMainElement:document.querySelector("main"),
 		init:function(){
 			let sections=controler.getsections();
 			let fragment=document.createDocumentFragment();
-			let myMainElement=document.querySelector("main");
 			let mymainHearo=document.querySelector(".main__hero");
 			sections.forEach(section=>{
 				let mysection=document.createElement("section");
@@ -210,10 +215,10 @@ window.onload=function() {
 				fragment.appendChild(mysection);
 				observer.observe(mysection);
 			});
-			myMainElement.appendChild(fragment);
+			this.myMainElement.appendChild(fragment);
 			observer.observe(mymainHearo);
 // add click eventlistener to 'main' element when click section h2 header collapse the content.
-			myMainElement.addEventListener("click",event=>{
+			this.myMainElement.addEventListener("click",event=>{
 				if(event.target.tagName==="H2"){
 					let fe=event.target.nextElementSibling;
 					let se=fe.nextElementSibling;
@@ -234,7 +239,12 @@ window.onload=function() {
 					};
 				}
 			});
+		},
+		scrollToViewport:function(data) {
+			let sectionElement=this.myMainElement.querySelector("section[data-nav='"+data+"']");
+			sectionElement.scrollIntoView({behavior:"smooth"});
 		}
+
 	}
 /**
  * Define 'backtotop' button view object
@@ -245,7 +255,7 @@ window.onload=function() {
 // Define init function for 'backtotop' button when window loaded:add click eventlistener when user click this button let the window back to top of viewport.
 		init:function() {
 			this.mybackTo.addEventListener("click",event=>{
-				window.scrollTo(0,0);
+				window.scrollTo({top:0,left:0,behavior:"smooth"});
 			});
 		},
 		setunvisible:function() {
