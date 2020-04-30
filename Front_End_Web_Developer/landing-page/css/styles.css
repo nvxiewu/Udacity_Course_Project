@@ -70,9 +70,7 @@ section {
     text-align: right;
 }
 
-.navbar__menu li {
-    display: inline-block;
-}
+
 
 .navbar__menu .menu__link {
     display: block;
@@ -94,13 +92,27 @@ section {
     transition: ease 0.3s all;
 }
 
+
+
 /* Header Styles */
 .page__header {
     background: #fff;
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 30%;
     z-index: 5;
+    opacity: 0.6;
+}
+
+@media only screen and (min-width: 35em){
+    .navbar__menu li {
+        display: inline-block;
+    }
+
+    .page__header {
+        opacity: 1.0;
+        width: 100%;
+    }
 }
 
 /* Footer Styles */
