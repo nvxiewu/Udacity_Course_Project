@@ -103,7 +103,9 @@ window.onload=function() {
  * Define observer object
  * 
 */
+
 	let observer=new IntersectionObserver(callback,{threshold:0.5});
+
 /**
  * Define navbar view object
  * 
