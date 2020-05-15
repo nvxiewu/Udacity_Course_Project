@@ -21,7 +21,7 @@ function handleSubmit(event) {
     })
     .then(res => res.json())
     .then(function(res) {
-        document.getElementById('results').innerHTML = res.text
+        document.getElementById('results').innerHTML = "<p><strong>The article(or sentence) you analyzed:</strong><br>"+res.text+"<br><strong>the description is "+res.subjectivity+",and the tone is "+res.polarity+".</strong></p>"
     }).catch((e)=>{
         console.log(e)
     })
