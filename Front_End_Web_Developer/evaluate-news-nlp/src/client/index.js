@@ -1,5 +1,6 @@
 import { checkForName } from './js/nameChecker'
 import { handleSubmit } from './js/formHandler'
+import {fetchData} from './js/fetchData'
 
 import './styles/resets.scss'
 import './styles/base.scss'
@@ -13,5 +14,6 @@ console.log("CHANGE!!");
 
 export {
     checkForName,
-    handleSubmit
+    handleSubmit,
+    fetchData
 }

@@ -24,7 +24,6 @@ function checkForName(inputText) {
     }else if(inputText!==""&&!re.test(inputText)){
         return {'text':inputText}
     }else{
-        alert("Must have input value")
         return {}
     }
     //if(names.includes(inputText)) {
