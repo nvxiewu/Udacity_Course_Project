@@ -1,3 +1,4 @@
+tripData = {}
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
@@ -8,6 +9,16 @@ app.use(cors())
 app.use(express.static('dist'))
 app.get('/',(req,res)=>{
     res.sendFile('dist/index.html')
+})
+app.get('/all',(req,res)=>{
+    res.send(tripData)
+})
+app.post('/add',(req,res)=>{
+    let data = req.body
+    Object.keys(data).forEach(key=>{
+        tripData[key]=data[key]
+    })
+    console.log(tripData)
 })
 const port = 3000
 const server = app.listen(port,()=>{console.log(`runing on localhost: ${port}`)})
