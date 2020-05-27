@@ -1,28 +1,20 @@
 import { fetchData, postData } from './test'
 const tripObject = {
     mytrip:{},
-    init:function(){
-        fetchData('http://localhost:3000/all').then(data=>{
-            this.updata(data)
-        })
+    init:async function(){
+        let data = await fetchData('http://localhost:3000/all')
+        this.mytrip = data
     },
     get:function(){
         return this.mytrip
     },
-    add:function(data){
-        postData('http://localhost:3000/add',data).then(newdata=>{
-            this.updata(newdata)
-        })
+    add:async function(data){
+        let newdata = await postData('http://localhost:3000/add',data)
+        this.mytrip = newdata
     },
-    remove:function(){
-        postData('http://localhost:3000/add',{}).then(newdata=>{
-            this.updata(newdata)
-        })
-    },
-    updata:function(data){
-        Object.keys(data).forEach(key=>{
-            this.mytrip[key]=data[key]
-        })
+    remove:async function(){
+        let newdata = await postData('http://localhost:3000/add',{})
+        this.mytrip = newdata
     }
 }
 const viewObject = {
@@ -31,23 +23,34 @@ const viewObject = {
         this.render()
     },
     render:function(){
-        let data = controller.gettrip()
+        let data = controller.getthistrip()
         console.log(data)
     }
 }
 const controller = {
+    thistrip:{},
+    issave:true,
     init:function(){
-        tripObject.init()
-        viewObject.init()
+        tripObject.init().then(res=>{
+            this.setthistrip(tripObject.get())
+            this.setthistripstate(true)
+            viewObject.init()
+        })
     },
-    gettrip:function(){
-        return tripObject.get()
+    getthistrip:function(){
+        return this.thistrip
     },
-    addtrip:function(data){
-        tripObject.add(data)
+    setthistrip:function(data){
+        this.thistrip = data
     },
-    removetrip:function(){
-        tripObject.remove()
+    setthistripstate:function(b){
+        this.issave = b
+    },
+    addtrip:async function(data){
+        await tripObject.add(data)
+    },
+    removetrip:async function(){
+        await tripObject.remove()
     }
 }
 export { controller }

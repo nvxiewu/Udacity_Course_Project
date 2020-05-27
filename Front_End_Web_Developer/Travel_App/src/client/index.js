@@ -26,16 +26,21 @@ let pixurl = pxbaseurl+pxapikey+"&q="+encodeURIComponent(location)
 //})
 //fetchData('http://localhost:3000/all')
 window.onload = ()=>{
-    controller.init()
+    controller.addtrip({test:"test1"}).then(res=>{
+        console.log('add data success')
+    })
+    controller.addtrip({location:"new york"}).then(res=>{
+        console.log('add data success')
+    })
 }
-const add = function(data) {
-    controller.addtrip(data)
-}
-add({
-    country:"America",
-    datetime:"2020-06-01",
-    hightemp:71.88,
-    lowtemp:63.99,
-    summary:"Partly cloudy throughout the day.",
-    imgurl:"https://pixabay.com/get/55e3d3474d57b108f5d08460962931781439dce75a4c704c7c2f7ad79349c25a_1280.jpg"
-})
+//const add = function(data) {
+    //controller.addtrip(data)
+//}
+//add({
+    //country:"America",
+    //datetime:"2020-06-01",
+    //hightemp:71.88,
+    //lowtemp:63.99,
+    //summary:"Partly cloudy throughout the day.",
+    //imgurl:"https://pixabay.com/get/55e3d3474d57b108f5d08460962931781439dce75a4c704c7c2f7ad79349c25a_1280.jpg"
+//})

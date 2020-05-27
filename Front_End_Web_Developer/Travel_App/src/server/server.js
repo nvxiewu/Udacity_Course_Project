@@ -15,10 +15,9 @@ app.get('/all',(req,res)=>{
 })
 app.post('/add',(req,res)=>{
     let data = req.body
-    Object.keys(data).forEach(key=>{
-        tripData[key]=data[key]
-    })
+    tripData = data
     console.log(tripData)
+    res.send(tripData)
 })
 const port = 3000
 const server = app.listen(port,()=>{console.log(`runing on localhost: ${port}`)})

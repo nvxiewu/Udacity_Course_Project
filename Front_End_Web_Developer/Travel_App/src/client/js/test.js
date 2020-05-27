@@ -2,7 +2,7 @@ const fetchData = async (url)=>{
     const res = await fetch(url)
     try{
         const data = await res.json()
-        console.log(data)
+        //console.log(data)
         return data
     }catch(e){
         console.log("error",e)
@@ -19,7 +19,6 @@ const postData = async (url = '',data = {})=>{
     })
     try{
         const newData = await res.json()
-        console.log(newData)
         return newData
     }catch(e){
         console.log("error",e)
