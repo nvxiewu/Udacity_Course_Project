@@ -26,12 +26,7 @@ let pixurl = pxbaseurl+pxapikey+"&q="+encodeURIComponent(location)
 //})
 //fetchData('http://localhost:3000/all')
 window.onload = ()=>{
-    controller.addtrip({test:"test1"}).then(res=>{
-        console.log('add data success')
-    })
-    controller.addtrip({location:"new york"}).then(res=>{
-        console.log('add data success')
-    })
+    controller.init()
 }
 //const add = function(data) {
     //controller.addtrip(data)
