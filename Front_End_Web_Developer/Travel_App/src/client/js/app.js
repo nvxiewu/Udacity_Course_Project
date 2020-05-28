@@ -1,4 +1,5 @@
 import { fetchData, postData } from './test'
+import { datevalidation } from './formvalid'
 const proxy = "https://cors-anywhere.herokuapp.com/"
 const pxbaseurl = "https://pixabay.com/api/?key="
 const pxapikey = "16616229-1aef1d0b813d684a8cde80c7e"
@@ -54,15 +55,21 @@ const viewObject = {
             e.preventDefault()
             let location = this.e_location.value
             let date = this.e_date.value
+            if(!datevalidation(date)){
+                alert("不合法的日期！")
+                return false
+            }
             let datetime = date.split('/').reverse().join('-')+"T01:00:00"
             fetchData(geobaseurl+encodeURIComponent(location)+geouserstr).then(data=>{
+                console.log(data)
                 let lat = data.geonames[0].lat
                 let lng = data.geonames[0].lng
+                let country = data.geonames[0].countryName
                 let pixres = fetchData(pxbaseurl+pxapikey+"&q="+encodeURIComponent(location))
                 let darkskyres = fetchData(proxy+darkskybaseurl+lat+","+lng+","+datetime)
                 Promise.all([pixres,darkskyres]).then(values=>{
                     let data = {
-                        country:values[1].timezone.split('/')[0],
+                        country:country,
                         location:location,
                         date:date,
                         hightemp:values[1].daily.data[0].apparentTemperatureHigh,
@@ -74,8 +81,9 @@ const viewObject = {
                     controller.setthistripstate(false)
                     this.render()
                 })
+            }).catch(error=>{
+                console.log(error)
             })
-            console.log('submit')
         })
         this.e_form.addEventListener('onkeyup',e=>{
             if(e.keyCode === '13'){
@@ -95,14 +103,19 @@ const viewObject = {
             if(controller.getthisstripstate()){
                 this.e_mytrip.classList.add('saveed')
                 this.e_mytrip.classList.remove('nosaveed')
+                this.e_save.disabled = true
+                this.e_remove.disabled = false
             }else{
                 this.e_mytrip.classList.add('nosaveed')
                 this.e_mytrip.classList.remove('saveed')
+                this.e_save.disabled = false
+                this.e_remove.disabled = true
             }
         }else{
             this.e_location.value = ""
             this.e_date.value = ""
             this.e_mytrip.classList.add('empty')
+            this.e_save.disabled = true
         }
     }
 }

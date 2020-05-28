@@ -1,6 +1,7 @@
 
 //import { fetchData, postData } from './js/test'
 import { controller } from './js/app'
+import './styles/state.scss'
 let location = "New York"
 let datetime = "2020-06-06"
 let proxy = "https://cors-anywhere.herokuapp.com/"
