@@ -1,4 +1,4 @@
-import { fetchData, postData } from './test'
+import { fetchData, postData } from './helper'
 import { datevalidation } from './formvalid'
 const proxy = "https://cors-anywhere.herokuapp.com/"
 const pxbaseurl = "https://pixabay.com/api/?key="
@@ -26,6 +26,7 @@ const tripObject = {
     }
 }
 const viewObject = {
+    e_main:document.querySelector('main'),
     e_mytrip:document.querySelector('.mytrip'),
     e_div_picture:document.querySelector('.picture'),
     e_picture:document.querySelector('.picture img'),
@@ -99,7 +100,7 @@ const viewObject = {
             this.e_location.setAttribute('value',data.location)
             this.e_date.setAttribute('value',data.date)
             this.e_div_result.innerHTML = `<p>${data.location},${data.country} is ${data.date} days away</p><p>Typical weather for then is:</p><p>High - ${data.hightemp},Low - ${data.lowtemp}<br>${data.summary}</p>`
-            this.e_mytrip.classList.remove('empty')
+            this.e_main.classList.remove('empty')
             if(controller.getthisstripstate()){
                 this.e_mytrip.classList.add('saveed')
                 this.e_mytrip.classList.remove('nosaveed')
@@ -114,7 +115,7 @@ const viewObject = {
         }else{
             this.e_location.value = ""
             this.e_date.value = ""
-            this.e_mytrip.classList.add('empty')
+            this.e_main.classList.add('empty')
             this.e_save.disabled = true
         }
     }

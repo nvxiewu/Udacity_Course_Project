@@ -1,0 +1,159 @@
+body{
+    max-width: 1100px;
+    margin: 0 auto;
+    header{
+            font-size: 4vw;
+    }
+}
+main{
+    background-color:lavenderblush;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+}
+.mytrip{
+    .picture{
+        margin: 1.5vw;
+        img{
+            width: 100%;
+        }
+    }
+    .content{
+        margin: 1.5vw;
+        .inquire{
+            font-size: 4vw;
+            font-weight: bold;
+            .form{
+                #location{
+                    font-size: 4vw;
+                    font-weight: bold;
+                    background-color: lavenderblush;
+                }
+                #date{
+                    font-size: 4vw;
+                    font-weight: bold;
+                    background-color: lavenderblush;
+                }
+            }
+        }
+        .btn{
+            .save{
+                font-size: 4vw;
+            }
+            .remove{
+                font-size: 4vw;
+            }
+        }
+        .result{
+            p:nth-of-type(1){
+                font-size:large;
+            }
+            p:nth-of-type(2){
+                font-size: large;
+            }
+            p:nth-of-type(3){
+                font-size: medium;
+            }
+            p:nth-of-type(4){
+                font-size: medium;
+            }
+
+        }
+    }
+}
+.empty{
+    background-color: lightgrey;
+    .mytrip{
+        .picture{
+            display: none;
+        }
+        .content{
+            width: 100%;
+            .inquire{
+                font-size: 3vw;
+                font-weight: bold;
+                .form{
+                    text-align: center;
+                    #location{
+                        font-size: 3vw;
+                        font-weight: bold;
+                        background-color:lightgrey ;
+                    }
+                    #date{
+                        font-size: 3vw;
+                        font-weight: bold;
+                        background-color: lightgrey;
+                    }
+                }
+            }
+            .btn{
+                text-align: center;
+                .save{
+                    font-size: 2vw;
+                }
+                .remove{
+                    font-size: 2vw;
+                }
+            }
+            .result{
+                display: none;
+            }
+        }
+    }
+}
+@media screen and (min-width:648px){
+    .mytrip{
+        display: flex;
+        .picture{
+            width: 45%;
+            margin: 1.5vw;
+            img{
+                width: 100%;
+            }
+        }
+        .content{
+            width: 55%;
+            margin: 1.5vw;
+            .inquire{
+                font-size: 2.2vw;
+                font-weight: bold;
+                .form{
+                    #location{
+                        font-size: 2.2vw;
+                        font-weight: bold;
+                        background-color: lavenderblush;
+                    }
+                    #date{
+                        font-size: 2.2vw;
+                        font-weight: bold;
+                        background-color: lavenderblush;
+                    }
+                }
+            }
+            .btn{
+                text-align: center;
+                .save{
+                    font-size: 2vw;
+                }
+                .remove{
+                    font-size: 2vw;
+                }
+            }
+            .result{
+                p:nth-of-type(1){
+                    font-size:large;
+                }
+                p:nth-of-type(2){
+                    font-size: large;
+                }
+                p:nth-of-type(3){
+                    font-size: medium;
+                }
+                p:nth-of-type(4){
+                    font-size: medium;
+                }
+    
+            }
+        }
+    }
+}
+
