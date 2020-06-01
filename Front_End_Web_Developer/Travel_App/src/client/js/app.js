@@ -128,6 +128,8 @@ const controller = {
             this.setthistrip(tripObject.get())
             this.setthistripstate(true)
             viewObject.init()
+        }).catch(e=>{
+            console.log('error',e)
         })
     },
     getthistrip:function(){
