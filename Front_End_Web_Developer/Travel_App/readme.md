@@ -1,4 +1,4 @@
-# NLP Project
+# Travel App Project
 
 ## Table of Contents
 
@@ -18,7 +18,7 @@ The author of the project is Shao Yi. If you have any questions, you can contact
 
 ## Getting_started
 
-`cd` into evaluate-news-nlp folder and run:
+`cd` into Travel_App folder and run:
 - `npm install`
 - `npm run build-prod`
 - `npm run start`
