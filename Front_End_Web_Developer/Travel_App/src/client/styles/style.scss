@@ -39,8 +39,14 @@ main{
             .save{
                 font-size: 4vw;
             }
+            .save:hover {
+                cursor: pointer;
+            }
             .remove{
                 font-size: 4vw;
+            }
+            .remove:hover {
+                cursor: pointer;
             }
         }
         .result{

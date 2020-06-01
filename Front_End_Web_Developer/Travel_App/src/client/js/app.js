@@ -6,7 +6,9 @@ const pxapikey = "16616229-1aef1d0b813d684a8cde80c7e"
 const darkskybaseurl="https://api.darksky.net/forecast/8755b770092b4abe92e2f7bf9a4b6ec6/"
 const geobaseurl = "http://api.geonames.org/searchJSON?q="
 const geouserstr = "&maxRows=10&username=nvxiewu123"
-
+/**
+ * Define the main object and its member methods
+ */
 const tripObject = {
     mytrip:{},
     init:async function(){
@@ -25,6 +27,9 @@ const tripObject = {
         this.mytrip = newdata
     }
 }
+/**
+ * Define view Object
+ */
 const viewObject = {
     e_main:document.querySelector('main'),
     e_mytrip:document.querySelector('.mytrip'),
@@ -37,7 +42,9 @@ const viewObject = {
     e_save:document.querySelector('.save'),
     e_remove:document.querySelector('.remove'),
     e_div_result:document.querySelector('.result'),
+    //Define init function
     init:function(){
+        //Define 'click' event listener on 'save' button
         this.e_save.addEventListener('click',e=>{
            controller.addtrip().then(res=>{
                 controller.setthistrip(tripObject.get())
@@ -45,6 +52,7 @@ const viewObject = {
                 this.render()
             })
         })
+        //Define 'click' event listener on 'remove' button
         this.e_remove.addEventListener('click',e=>{
             controller.removetrip().then(res=>{
                 controller.setthistrip(tripObject.get())
@@ -52,15 +60,18 @@ const viewObject = {
                 this.render()
             })
         })
+        //Define 'submit' event listener on 'form' element
         this.e_form.addEventListener('submit',e=>{
             e.preventDefault()
             let location = this.e_location.value
             let date = this.e_date.value
+            //Check the validity of the date
             if(!datevalidation(date)){
                 alert("不合法的日期！")
                 return false
             }
             let datetime = date.split('/').reverse().join('-')+"T01:00:00"
+            //Call API asynchronously
             fetchData(geobaseurl+encodeURIComponent(location)+geouserstr).then(data=>{
                 console.log(data)
                 let lat = data.geonames[0].lat
@@ -69,6 +80,7 @@ const viewObject = {
                 let pixres = fetchData(pxbaseurl+pxapikey+"&q="+encodeURIComponent(location))
                 let darkskyres = fetchData(proxy+darkskybaseurl+lat+","+lng+","+datetime)
                 Promise.all([pixres,darkskyres]).then(values=>{
+                    //Get data and build the main object
                     let data = {
                         country:country,
                         location:location,
@@ -93,13 +105,15 @@ const viewObject = {
         })
         this.render()
     },
+    //Define view render function
     render:function(){
         let data = controller.getthistrip()
+        //If the rendering object is not empty, then dynamically construct DOM elements
         if(JSON.stringify(data)!=='{}'){
             this.e_picture.setAttribute('src',data.imgurl)
             this.e_location.setAttribute('value',data.location)
             this.e_date.setAttribute('value',data.date)
-            this.e_div_result.innerHTML = `<p>${data.location},${data.country} is ${data.date} days away</p><p>Typical weather for then is:</p><p>High - ${data.hightemp},Low - ${data.lowtemp}<br>${data.summary}</p>`
+            this.e_div_result.innerHTML = `<p>${data.location},${data.country} is ${dayConversion(data.date)} days away</p><p>Typical weather for then is:</p><p>High - ${data.hightemp},Low - ${data.lowtemp}<br>${data.summary}</p>`
             this.e_main.classList.remove('empty')
             if(controller.getthisstripstate()){
                 this.e_mytrip.classList.add('saveed')
@@ -112,6 +126,7 @@ const viewObject = {
                 this.e_save.disabled = false
                 this.e_remove.disabled = true
             }
+        //If the render object is empty, set the home page rendering state
         }else{
             this.e_location.value = ""
             this.e_date.value = ""
@@ -120,6 +135,9 @@ const viewObject = {
         }
     }
 }
+/**
+ * Define controller Object
+ */
 const controller = {
     thistrip:{},
     issave:true,
@@ -150,5 +168,15 @@ const controller = {
     removetrip:async function(){
         await tripObject.remove()
     }
+}
+/**
+ * Define the date conversion function
+ * 
+ */
+function dayConversion (date) {
+    let newdate = date.split('/').reverse().join('-')
+    let time = Date.parse(new Date())
+    let starttime = Date.parse(newdate)
+    return parseInt((starttime-time)/(1000*60*60*24))
 }
 export { controller }
