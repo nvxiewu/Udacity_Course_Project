@@ -1,5 +1,5 @@
 import { controller } from './js/app'
-import './styles/main.scss'
+import './styles/style.scss'
 window.onload = ()=>{
     controller.init()
 }
